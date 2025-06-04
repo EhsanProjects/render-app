@@ -4,6 +4,7 @@ from macys_login import get_commission
 from datetime import datetime
 from collections import defaultdict
 import json
+
 # import sys
 # print("sys.prefix:", sys.prefix)
 # print("sys.base_prefix:", sys.base_prefix)
@@ -400,4 +401,4 @@ def compare_commissions():
          comparison_data=comparison_data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

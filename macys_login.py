@@ -26,8 +26,8 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     print("Starting Selenium session...")
 
     options = uc.ChromeOptions()
-    options.add_argument("--start-maximized")
-    options.add_argument("--disable-blink-features=AutomationControlled")
+    # options.add_argument("--start-maximized")
+    # options.add_argument("--disable-blink-features=AutomationControlled")
     # Add headless browser flags
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
@@ -37,6 +37,8 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     if chrome_path:
         options.binary_location = chrome_path  # Tell Selenium where Chrome is
     # Launch browser
+    else:
+        print("GOOGLE_CHROME_BIN not found in env vars")
     driver = uc.Chrome(options=options)
     # driver = uc.Chrome(version_main=135, options=options)
 
