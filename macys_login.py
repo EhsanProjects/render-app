@@ -9,7 +9,7 @@
 # from datetime import datetime
 # import time
 # import re
-
+import os
 from selenium.webdriver.support import expected_conditions as EC
 import undetected_chromedriver as uc
 # pip install xhtml2pdf pandas openpyxl
@@ -28,8 +28,17 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     options = uc.ChromeOptions()
     options.add_argument("--start-maximized")
     options.add_argument("--disable-blink-features=AutomationControlled")
-
-    driver = uc.Chrome(version_main=135, options=options)
+    # Add headless browser flags
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    # Optional: Use Render environment variable
+    chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
+    if chrome_path:
+        options.binary_location = chrome_path  # Tell Selenium where Chrome is
+    # Launch browser
+    driver = uc.Chrome(options=options)
+    # driver = uc.Chrome(version_main=135, options=options)
 
     try:
         print("Loading login page...")
