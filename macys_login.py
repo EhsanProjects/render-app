@@ -24,23 +24,22 @@ import re
 
 def get_commission(employee_id, password, start_date=None, end_date=None):
     print("Starting Selenium session...")
-
+    chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
+    if not chrome_path:
+        raise Exception("GOOGLE_CHROME_BIN not set in environment")
     options = uc.ChromeOptions()
     # options.add_argument("--start-maximized")
     # options.add_argument("--disable-blink-features=AutomationControlled")
     # Add headless browser flags
+    options.binary_location = chrome_path
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     # Optional: Use Render environment variable
-    chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
-    if chrome_path:
-        options.binary_location = chrome_path  # Tell Selenium where Chrome is
-    # Launch browser
-    else:
-        print("GOOGLE_CHROME_BIN not found in env vars")
+   
     driver = uc.Chrome(options=options)
     # driver = uc.Chrome(version_main=135, options=options)
+    print(f"Using Chrome binary at: {chrome_path}")
 
     try:
         print("Loading login page...")
