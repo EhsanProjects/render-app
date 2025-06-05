@@ -32,7 +32,8 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     options.add_argument("--disable-dev-shm-usage")
     # Optional: Use Render environment variable
     
-    driver = uc.Chrome(options=options, use_subprocess=True)
+    driver = uc.Chrome(options=options, browser_executable_path="/usr/bin/google-chrome", use_subprocess=True)
+
 
 
     # driver = uc.Chrome(version_main=135, options=options)
