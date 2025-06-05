@@ -29,7 +29,8 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
   
     options = uc.ChromeOptions()
   
-    options.add_argument("--headless")
+    options.add_argument("--headless=new")
+    options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     # Optional: Use Render environment variable
@@ -41,7 +42,7 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
 
     # driver = uc.Chrome(version_main=135, options=options)
     
-    print("Browser started.")
+    # print("Browser started.")
     try:
         print("Loading login page...")
         driver.get("https://hr.macys.net/insite/compensation/fem_review.aspx")
