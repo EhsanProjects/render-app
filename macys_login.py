@@ -25,7 +25,7 @@ import shutil
 
 
 def get_commission(employee_id, password, start_date=None, end_date=None):
-    print("Starting Selenium session...")
+    # print("Starting Selenium session...")
   
     options = uc.ChromeOptions()
   
@@ -36,7 +36,7 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     # Optional: Use Render environment variable
    # ✅ Explicitly set path to Chrome binary
     chrome_path = "/usr/bin/google-chrome"
-    print("Chrome path:", shutil.which("google-chrome"))
+    # print("Chrome path:", shutil.which("google-chrome"))
     driver = uc.Chrome(options=options, browser_executable_path=chrome_path, use_subprocess=True)
 
 
@@ -44,10 +44,10 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     
     # print("Browser started.")
     try:
-        print("Loading login page...")
+        # print("Loading login page...")
         driver.get("https://hr.macys.net/insite/compensation/fem_review.aspx")
 
-        print("Page loaded. Attempting login...")
+        # print("Page loaded. Attempting login...")
         # Wait and input username
         WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.ID, "idToken2"))
@@ -67,17 +67,17 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
         WebDriverWait(driver, 20).until_not(
             EC.presence_of_element_located((By.ID, "loginButton_0"))
         )
-        print("Login successful.")
+        # print("Login successful.")
 
         # Reset to default content in case of frame switches
         driver.switch_to.default_content()
 
         # Wait for dropdown to appear
-        print("Waiting for dropdown...")
+        # print("Waiting for dropdown...")
         WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.NAME, "lbStmtDate"))
         )
-        print("Dropdown found!")
+        # print("Dropdown found!")
 
         # Parse date filters
         if start_date:
@@ -95,17 +95,17 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
             try:
                 option_date = datetime.strptime(date_text, "%m/%d/%Y")
             except ValueError:
-                print("Skipping invalid date format:", date_text)
+                # print("Skipping invalid date format:", date_text)
                 continue
 
             if start_date and option_date < start_date:
-                print(f"Skipping {date_text} — before start date.")
+                # print(f"Skipping {date_text} — before start date.")
                 continue
             if end_date and option_date > end_date:
-                print(f"Skipping {date_text} — after end date.")
+                # print(f"Skipping {date_text} — after end date.")
                 continue
 
-            print(f"Fetching commission for {date_text}...")
+            # print(f"Fetching commission for {date_text}...")
 
             # Re-locate dropdown each time to avoid stale reference
             select_elem = Select(driver.find_element(By.NAME, "lbStmtDate"))
@@ -148,7 +148,7 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
                 elements = driver.find_elements(By.XPATH, "//*[contains(., 'Productive Hours') and not(self::script or self::style)]")
                 for el in elements:
                     text = el.text.strip()
-                    print("🔎 Found element text:", text)  # Debug print
+                    # print("🔎 Found element text:", text)  # Debug print
                     match = re.search(r"Productive Hours:\s*([\d]+\.\d+)", text)
                     # match = re.search(r"([\d]+\.\d+)", text)
                     if match:
@@ -180,7 +180,7 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
         return commissions if commissions else [{"date": "No commission data found", "amount": "0", "productive_hours":"0"}]
 
     except Exception as e:
-        print("🚨 Unexpected error:", e)
+        # print("🚨 Unexpected error:", e)
         driver.save_screenshot("error_unexpected.png")
         return [{"date": "Error", "amount": str(e)}]
 
