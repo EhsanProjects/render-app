@@ -24,9 +24,9 @@ import re
 
 def get_commission(employee_id, password, start_date=None, end_date=None):
     print("Starting Selenium session...")
-    chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
-    if not chrome_path:
-        raise Exception("GOOGLE_CHROME_BIN not set in environment")
+    # chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
+    # if not chrome_path:
+    #     raise Exception("GOOGLE_CHROME_BIN not set in environment")
     options = uc.ChromeOptions()
     # options.add_argument("--start-maximized")
     # options.add_argument("--disable-blink-features=AutomationControlled")
