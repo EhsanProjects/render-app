@@ -20,5 +20,6 @@ RUN pip install -r requirements.txt
 
 
 EXPOSE 8000
+CMD ["gunicorn", "--timeout", "120", "-b", "0.0.0.0:10000", "flask_app:app"]
 
-CMD ["gunicorn", "flask_app:app", "--bind", "0.0.0.0:8000"]
+# CMD ["gunicorn", "flask_app:app", "--bind", "0.0.0.0:8000"]
