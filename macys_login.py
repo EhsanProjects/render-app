@@ -1,44 +1,39 @@
-# from selenium.webdriver.common.keys import Keys
-# from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.chrome.service import Service
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait, Select
-# from selenium.webdriver.support import expected_conditions as EC
-# from webdriver_manager.chrome import ChromeDriverManager
-# from datetime import datetime
-# import time
-# import re
+
 import os
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 import undetected_chromedriver as uc
 # pip install xhtml2pdf pandas openpyxl
-from selenium.webdriver.common.keys import Keys
+
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import undetected_chromedriver as uc
 import re
-import shutil
+
 
 
 
 def get_commission(employee_id, password, start_date=None, end_date=None):
     # print("Starting Selenium session...")
   
-    options = uc.ChromeOptions()
-  
+    # options = uc.ChromeOptions()
+    options = Options()
+    options.binary_location = "/usr/bin/chromium"
     options.add_argument("--headless=new")
-    options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920x1080")
+    options.add_argument("--single-process")
     # Optional: Use Render environment variable
    # ✅ Explicitly set path to Chrome binary
-    chrome_path = "/usr/bin/google-chrome"
+    # chrome_path = "/usr/bin/google-chrome"
     # print("Chrome path:", shutil.which("google-chrome"))
-    driver = uc.Chrome(options=options, browser_executable_path=chrome_path, use_subprocess=True)
-
+    # driver = uc.Chrome(options=options, browser_executable_path=chrome_path, use_subprocess=True)
+    driver = webdriver.Chrome(options=options)
 
     # driver = uc.Chrome(version_main=135, options=options)
     
