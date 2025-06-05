@@ -20,6 +20,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import undetected_chromedriver as uc
 import re
+import shutil
+
 
 
 def get_commission(employee_id, password, start_date=None, end_date=None):
@@ -33,6 +35,7 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     # Optional: Use Render environment variable
    # ✅ Explicitly set path to Chrome binary
     chrome_path = "/usr/bin/google-chrome"
+    print("Chrome path:", shutil.which("google-chrome"))
     driver = uc.Chrome(options=options, browser_executable_path=chrome_path, use_subprocess=True)
 
 
