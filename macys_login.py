@@ -36,10 +36,11 @@ def get_commission(employee_id, password, start_date=None, end_date=None):
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     # Optional: Use Render environment variable
-   
-    driver = uc.Chrome(options=options)
-    # driver = uc.Chrome(version_main=135, options=options)
     print(f"Using Chrome binary at: {chrome_path}")
+    driver = uc.Chrome(options=options, browser_executable_path=chrome_path)
+
+    # driver = uc.Chrome(version_main=135, options=options)
+    
 
     try:
         print("Loading login page...")
